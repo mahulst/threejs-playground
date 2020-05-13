@@ -24,7 +24,7 @@ export class App {
   private brick: Group;
 
   constructor() {
-    this.brick = createAxis([[1, 0, 0], [0, 1, 0], [0, 0, 1]], 2, 2);
+    this.brick = createAxis([[1, 0, 0], [0, 1, 0], [0, 1, 1]], 2, 2);
 
     this.scene.add(this.brick);
 
@@ -77,17 +77,10 @@ export const createAxis = (
 
   mesh.up.set(0, 1, 0);
 
-  var geometry = new BoxBufferGeometry( 0.1, 0.1, 0.1 );
-  var material = new MeshBasicMaterial( {color: 0x00ff00} );
-  var cube = new Mesh( geometry, material );
-
-  const point = new Vector3(0, 1, 1)
-  cube.position.set(point.x,point.y,point.z)
-  group.add(cube)
   mesh.lookAt(new Vector3(...axisVector));
 
-  cube.position.add(new Vector3(...axisVector));
-  mesh.position.set(...axisVector).multiplyScalar(size * 0.85);
+  const position = new Vector3(...axisVector).normalize().toArray()
+  mesh.position.set(position[0],position[1],position[2]).multiplyScalar(size * 0.85);
   mesh.updateMatrix();
   const lineGeometry = new BufferGeometry();
   lineGeometry.setAttribute(
