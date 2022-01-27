@@ -7,7 +7,7 @@
     "build": "webpack --mode=production"
   },
   "dependencies": {
-    "three": "~0.116.1"
+    "three": "~0.137.0"
   },
   "devDependencies": {
     "ts-loader": "^7.0.3",
